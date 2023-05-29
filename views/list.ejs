@@ -28,7 +28,7 @@
 
         <div class="container">
             <ul class="list-group">
-                <% for(var i=0; i<posts.length; i++){ %>
+                <% for(let i=0; i<posts.length; i++){ %>
                     <li class="list-group-item">
                         <p>글번호 : <%= posts[i]._id %>
                         </p>
@@ -48,20 +48,20 @@
         <script>
             $("#search").click(function () {
                 console.log(1);
-                var 입력한값 = $('#search-input').val()
+                let 입력한값 = $('#search-input').val()
                 window.location.replace('/search?value=' + 입력한값)
             })
         </script>
         <script>
 
             $('.delete').click(function (e) {
-                var 글번호 = e.target.dataset.id;
-                var 지금누른거 = $(this);
+                let 글번호 = e.target.dataset.id;
+                let 지금누른거 = $(this);
                 $.ajax({
                     method: 'DELETE',
                     url: '/delete',
                     data: { _id: 글번호 },
-                }).done(function (결과) {
+                }).done(function (res) {
                     console.log('성공했어염')
                     지금누른거.parent('li').fadeOut();
                 }).fail(function (a, b, c) {
