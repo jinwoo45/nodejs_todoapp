@@ -1,14 +1,18 @@
+//express 설정
 const express = require("express");
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
-//view 엔진 설정
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+//methodoveride
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
-app.set("view engine", "ejs");
-require("dotenv").config();
+
+//view 엔진 설정
 app.use("/public", express.static("public"));
+app.set("view engine", "ejs");
+
+//환경변수 설정
+require("dotenv").config();
 
 //몽고디비 설정
 const MongoClient = require("mongodb").MongoClient;
