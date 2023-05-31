@@ -18,35 +18,29 @@ require("dotenv").config();
 const MongoClient = require("mongodb").MongoClient;
 let db;
 
-const uri =
+let uri =
   "mongodb+srv://admin:nodejs1234@cluster0.1nskvwn.mongodb.net/?retryWrites=true&w=majority";
 
 MongoClient.connect(uri, function (err, client) {
-  if (err) return console.log("에러낫다", err);
+  if (err) return console.log("DB연결 에러", err);
 
   console.log("DB연결 성공");
   db = client.db("todoapp");
 
   app.listen(8080, function () {
-    console.log("listening on 8080");
+    console.log("listening on 80");
   });
 });
 
 //html 파일 렌더링
 app.get("/", function (req, res) {
-  res.render("index.ejs");
+  db.collection("post")
+    .find()
+    .toArray(function (err, res) {});
+  res.render("index.ejs", { posts: res });
 });
 app.get("/write", function (req, res) {
   res.render("write.ejs");
-});
-
-app.get("/list", function (req, res) {
-  db.collection("post")
-    .find()
-    .toArray(function (err, res) {
-      console.log(res);
-      // res.render("list.ejs", { posts: res });
-    });
 });
 
 app.get("/detail/:id", function (req, res) {
