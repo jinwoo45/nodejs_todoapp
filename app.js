@@ -36,8 +36,10 @@ MongoClient.connect(uri, function (err, client) {
 app.get("/", function (req, res) {
   db.collection("post")
     .find()
-    .toArray(function (err, res) {});
-  res.render("index.ejs", { posts: res });
+    .toArray(function (err, result) {
+      console.log(result);
+      res.render("index.ejs", { posts: result });
+    });
 });
 app.get("/write", function (req, res) {
   res.render("write.ejs");

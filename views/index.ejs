@@ -22,7 +22,7 @@
   <body>
     <%- include('nav.html') %>
 
-    <h4 class="ml-3 my-3 text-center"> 먹기 리스트</h4>
+    <h4 class="ml-3 my-3 text-center"> TO DO LIST</h4>
 
     <div class="container input-group mb-2">
         <input class="form-control" id="search-input">
@@ -38,10 +38,10 @@
                     <p>글번호 : <%= posts[i]._id %>
                     </p>
                     <a href="/detail/<%= posts[i]._id %>">
-                        <h4>할일 제목 : <%=posts[i].제목 %>
+                        <h4>할일 제목 : <%=posts[i].title %>
                         </h4>
                     </a>
-                    <p>할일 마감날짜 : <%=posts[i].날짜 %>
+                    <p>할일 마감날짜 : <%=posts[i].content %>
                     </p>
                     <button class="delete btn btn-danger" data-id="<%= posts[i]._id %>">삭제</button>
                 </li>
@@ -60,6 +60,8 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      console.log("posts", <%= JSON.stringify(posts)%>)
+
       $("#search").click(function () {
           console.log(1);
           let 입력한값 = $('#search-input').val()
